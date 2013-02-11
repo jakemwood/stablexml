@@ -10,7 +10,7 @@ module.exports = function() {
 	var parentObject = [parsingObject];
 	
 	parser.onerror = function(e) {
-		cb(error, null);
+		cb(e, null);
 	}
 	
 	parser.onopentag = function(node) {
@@ -23,7 +23,7 @@ module.exports = function() {
 			}
 		}
 		newObject[node.name]._ = [];
-		parentObject.push(currentObject);	
+		parentObject.push(currentObject);
 		currentObject.push(newObject);
 		currentObject = newObject[node.name]._;
 	}
@@ -39,7 +39,11 @@ module.exports = function() {
 				var keys = Object.keys(currentObject[x]);
 				for (var y in keys) {
 					var xo = currentObject[x];
-					delete xo[keys[y]]._;
+					if (xo[keys[y]]._) {
+						if (xo[keys[y]]._.length == 0) {
+							delete xo[keys[y]]._;
+						}
+					}
 				}
 			}
 		}
