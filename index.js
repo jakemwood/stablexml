@@ -1,0 +1,1 @@
+module.exports = process.env.XML_COV ? require('./lib-cov/stablexml') : require('./lib/stablexml');
