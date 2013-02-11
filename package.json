@@ -6,6 +6,9 @@
   "scripts": {
     "test": "mocha -u tdd"
   },
+  "dependencies": {
+	  "sax": "*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yakkob/stablexml.git"
