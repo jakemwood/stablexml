@@ -92,4 +92,49 @@ suite('StableXML', function() {
 		});
 	});
 	
+	suite('#parseObject()', function() {
+		
+		test('should parse a simple object', function() {
+			assert.equal(parser.parseObject({ test: {} } ), "<test />");
+			
+			assert.equal(parser.parseObject({
+				test: {
+					$: {
+						foo: "bar"
+					}
+				}
+			}), "<test foo=\"bar\" />");
+			
+			assert.equal(parser.parseObject({
+				test: {
+					_: [
+						{
+							foo: {}
+						}
+					]
+				}
+			}), "<test><foo /></test>");
+			
+			assert.equal(parser.parseObject({
+				test: {
+					$: {
+						foo: "bar"
+					},
+					_: [
+						{
+							mocha: {
+								$: {
+									unit: "tester"
+								}
+							}
+						}
+					]
+				}
+			}), "<test foo=\"bar\"><mocha unit=\"tester\" /></test>");
+			
+			assert.equal(parser.parseObject({}), "");
+			
+			assert.equal(parser.parseObject([ { test: {}}, { foo: {}} ]), "<test /><foo />");
+		});
+	});
 });
