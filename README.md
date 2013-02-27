@@ -111,7 +111,7 @@ A node is represented by:
 	
 Where "foo" can be any arbitrary XML tag name.
 
-## Attributes
+### Attributes
 Attributes is either undefined _or_ an associative JavaScript object containing the keys and values of the attributes of a true XML node.
 
 ## Questions?
